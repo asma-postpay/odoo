@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="payment_postpay_product_widget" inherit_id="website_sale.product_price">
+            <xpath expr="//div//h3[hasclass('css_editable_mode_hidden')]" position="after">
+                    <div class="postpay-widget"
+                         t-att-data-widget-url="'https://widgets.postpay.io'"
+        t-att-data-type="'product'"
+       t-att-data-amount="combination_info['price'] * 100"
+                         t-att-data-currency="'AED'">
+</div>
+            </xpath>
+        </template>
+
+            <template id="payment_postpay.payment_method_form" inherit_id="payment.method_form">
+        <xpath expr="//p[@name='o_payment_secured_by']" position="after">
+         <div class="postpay-widget"
+              t-att-data-widget-url="'https://widgets.postpay.io'"
+        t-att-data-type="'payment-summary'"
+       t-att-data-amount="round(website_sale_order.amount_total * 100)"
+                         t-att-data-currency="'AED'">
+</div>
+        </xpath>
+    </template>
+
+        <template id="payment_postpay_web_layout" inherit_id="web.layout">
+            <xpath expr="//head" position="inside">
+
+                               <script type="application/javascript">
+  window.postpayAsyncInit = function() {
+    postpay.init({
+      merchantId: "id_14aebbb6901e4758a87891e3ddd041fa",
+      locale: "en"
+    });
+  };
+</script>
+                <script defer="defer" type="text/javascript" src="https://cdn.postpay.io/v1/js/postpay.js"></script>
+
+            </xpath>
+        </template>
+    </data>
+</odoo>

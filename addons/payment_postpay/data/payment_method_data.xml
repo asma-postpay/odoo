@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="payment_method_postpay" model="payment.method">
+        <field name="name">Postpay</field>
+        <field name="code">postpay</field>
+        <field name="sequence">1</field>
+        <field name="image" type="base64" file="payment_postpay/static/src/img/postpay.png"/>
+        <field name="support_tokenization">False</field>
+        <field name="support_express_checkout">False</field>
+        <field name="support_refund">True</field>
+        <field name="supported_country_ids"
+               eval="[Command.set([
+                         ref('base.ae'),
+                     ])]"
+        />
+        <field name="supported_currency_ids"
+               eval="[Command.set([
+                         ref('base.AED'),
+                     ])]"
+        />
+    </record>
+</odoo>
